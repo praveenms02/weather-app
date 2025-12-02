@@ -8,12 +8,14 @@ const searchButton = document.getElementById("search-button");
 async function checkWeather(cityInput) {
   const response = await fetch(APIUrl + cityInput + `&appid=${APIKey}`);
   var data = await response.json();
-  console.log(data);
+  // console.log(data);
   if(data.cod === "404") {
     document.querySelector(".weather").style.display = "none";
     document.querySelector(".error").style.display = "block";
     return;
   }
+  document.querySelector(".error").style.display = "none";
+
   document.querySelector(".city").innerHTML = data.name;
   document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
   document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
